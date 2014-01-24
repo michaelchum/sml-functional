@@ -1,0 +1,20 @@
+(* Michael Ho 260532097 *)
+
+open Real
+
+(* QUESTION 5 *)
+
+(* ONLY WORKS WITH A REAL LIST *)
+
+fun split [] = ([],[])
+	| split [x] = ([x],[]) 
+	| split (x1::x2::xs) = let val (ys, zs) = split xs in ((x1::ys), (x2::zs)) end;
+
+fun merge ([],[]) = []
+	| merge (l1,[]) = l1
+	| merge ([],l1) = l1
+	| merge (l1,l2) = if(hd(l1)<hd(l2)) then hd(l1)::hd(l2)::merge(tl(l1),tl(l2)) else hd(l2)::hd(l1)::merge(tl(l1),tl(l2))
+
+fun mergesort [] = []
+	| mergesort [x]  = [x]
+	| mergesort l = let val (left, right) = split(l) in merge(mergesort(left),mergesort(right)) end;

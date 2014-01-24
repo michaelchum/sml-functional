@@ -20,7 +20,6 @@ fun subtract (nil,n) = nil
 fun variance (l) = sumlist(squarelist(subtract(l,mean(l))))/fromInt(length(l))
 
 (* QUESTION 2 *)
-
 (* Runs in O(n) *)
 fun member (x,nil) = false
 	| member (x,l) = if(x=hd(l)) then true 
@@ -31,12 +30,10 @@ fun remove (x,nil) = []
 	else hd(l)::remove(x,tl(l))
 
 (* QUESTION 3 *)
-
 fun isolate [] = []
 	| isolate l = hd(l)::isolate(remove(hd(l),tl(l)))
 
 (* QUESTION 4 *)
-
 fun common ([],[]) = []
 	| common ([],l) = []
 	| common (l1,l2) = if(member(hd(l1),l2)) then hd(l1)::common(remove(hd(l1),tl(l1)),remove(hd(l1),l2))

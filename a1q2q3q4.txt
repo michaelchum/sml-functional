@@ -1,0 +1,26 @@
+(* Michael Ho 260532097 *)
+
+open Real
+
+(* QUESTION 2 *)
+
+(* Runs in O(n) *)
+fun member (x,nil) = false
+	| member (x,l) = if(x=hd(l)) then true 
+	else member(x,tl(l))
+
+fun remove (x,nil) = []
+	| remove (x,l) = if(x=hd(l)) then remove(x,tl(l))
+	else hd(l)::remove(x,tl(l))
+
+(* QUESTION 3 *)
+
+fun isolate [] = []
+	| isolate l = hd(l)::isolate(remove(hd(l),tl(l)))
+
+(* QUESTION 4 *)
+
+fun common ([],[]) = []
+	| common ([],l) = []
+	| common (l1,l2) = if(member(hd(l1),l2)) then hd(l1)::common(remove(hd(l1),tl(l1)),remove(hd(l1),l2))
+	else common(remove(hd(l1),tl(l1)),l2)
