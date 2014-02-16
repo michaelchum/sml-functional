@@ -1,0 +1,28 @@
+Michael Ho 260532097
+
+QUESTION 2
+
+fun bad_repeated f n =
+	fn x => if (n=0) then x
+	else f(bad_repeated f (n-1))
+
+The type result by this function is wrong:
+val bad_repeated = fn : (('a -> 'a) -> 'a) -> int -> 'a -> 'a
+
+The first input function f has type:
+val f = fn: ('a -> 'a) -> 'a
+
+But it should be a simple function f of type:
+val f = fn: 'a -> 'a
+
+It is because of the 3rd line which computes f(bad_repeated f (n-1)) therefore the function f's input is bad_repeated itself, f and (n-1)
+
+We don't want repeated to have bad_repeated as argument for f, the type of repeated should be ('a -> 'a) -> int -> ('a - 'a)
+
+This inputs a function f of type 'a -> 'a with an integer and outputs a function f of the same type 'a -> 'a
+
+We can perhaps correct this by changing the third line to:
+else (bad_repeated f  n-1)(f x)
+
+
+

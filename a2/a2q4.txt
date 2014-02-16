@@ -1,0 +1,40 @@
+Michael Ho 260532097
+
+QUESTION 4
+
+Statement to prove:
+
+	An element s is in the binary tree T if and only if s is in flatten(T)
+	(i.e.) s is in T <=> s is in flatten(T)
+
+Base Case:
+
+	Suppose T is an empty tree (Empty)
+	Then flatten(T) = []
+	(i.e.) s is not in T => flatten(T) does not contain s
+
+	Suppose flatten(T) = []
+	Then T is an empty tree
+	(i.e.) flatten(T) does not contain s => s is not in T
+
+Inductive Hypothesis:
+
+	For all trees of n elements, the two base cases above are true
+
+Inductive Step:
+
+	Let a tree T of n+1 elements and the set of elements be {n1,n2,...,nn} where n1 is the root
+	So T is not an empty tree (Empty)
+
+	Then flatten(T) = n1::flatten(l) @ flatten(r) = n1::n2::flatten(l) @ flatten(r) = ...
+	
+	Suppose {n1,...,nn} contains ni=s where i is the set of positive integer {1,2,3,4,5...}
+
+	Then flatten(T) = n1::flatten(l) @ flatten(r) = n1:: ... ::ni:: ... ::flatten(l) @ flatten(r) = [n1 ... ni ... nn]
+	(i.e.) s is in T => s is in flatten[T]
+
+	Suppose flatten(T) = [n1 ... ni ... nn] where ni=s
+
+	Then flatten traversed T in preorder, i.e. every root of every subtree in T appears in flatten(T)
+		such as (n2,n1,n3), (n4,n2,n5), ... , (ni*2, ni, ni*2+1), ...
+	(i.e.) s is in flatten[T] => s is in T
