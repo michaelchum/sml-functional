@@ -19,7 +19,9 @@ fun less(x,y) = (x < y)
 fun show (ref Empty) = (print("\n"))
   | show (ref (RCons(h,rt))) = (print(Int.toString(h)^","); show(rt))
 
-fun insert (f:('a * 'a) -> bool, i:'a, ref Empty:'a rlist ref) = ref (RCons(i, ref Empty))
+(* Use tail recursion and check using the function f's boolean output to correctly acknowledge where to insert the element *)
+(* Everything here is referenced *)
+fun insert (f:('a * 'a) -> bool, i:'a, ref Empty:'a rlist ref) = ref (RCons(i, ref Empty)) (* If an element is inserted to an empty list *)
     | insert (f, i, ref (RCons(h,rt))) =
       let val check = f(i,h) in
         if (check) then ref (RCons(i, ref (RCons(h,rt))))

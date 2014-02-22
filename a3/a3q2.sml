@@ -15,6 +15,9 @@ fun make_protected_account(opening_balance: int,password: string) =
     in
      let
         (* val acc = *)
+        (* First check if password is right, else raise exception *)
+        (* Then handle each transactions cases differently and checking the balance using the dereferenced variable *)
+        (* The output is either an exception or a print thus it yields unit() *)
         fun acc (pw:string,t:transactions) = 
             if (pw=passwd) then
                 case t of
